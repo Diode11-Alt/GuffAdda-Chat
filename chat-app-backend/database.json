@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "dev",
+    "password": "dev",
+    "host": "localhost",
+    "database": "chatdb"
+  }
+}
