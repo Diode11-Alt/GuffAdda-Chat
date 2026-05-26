@@ -1,10 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { query } from '../config/db';
-import { redis } from '../config/redis';
+import { query } from '../config/db';
 import bcrypt from 'bcrypt';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'superrefreshsecret';
+
+const otpStore = new Map<string, { otp: string, expiresAt: number }>();
 
 export class AuthService {
   static async register(email: string, passwordHash: string, displayName: string): Promise<{ user: any, tokens: any }> {
@@ -61,16 +63,27 @@ export class AuthService {
 
   static async requestOtp(email: string): Promise<string> {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    await redis.set(`otp:${email}`, otp, 'EX', 300);
+    // Store OTP with 5 minute expiration (300000 ms)
+    otpStore.set(email, { otp, expiresAt: Date.now() + 300000 });
     return otp;
   }
 
   static async verifyOtp(email: string, otp: string): Promise<boolean> {
-    const storedOtp = await redis.get(`otp:${email}`);
-    if (storedOtp && storedOtp === otp) {
-      await redis.del(`otp:${email}`);
-      return true;
+    const storedData = otpStore.get(email);
+    if (storedData) {
+      if (storedData.expiresAt < Date.now()) {
+        otpStore.delete(email);
+        return false;
+      }
+      if (storedData.otp === otp) {
+        otpStore.delete(email);
+        return true;
+      }
     }
     return false;
+  }
+  
+  static deleteOtp(email: string) {
+    otpStore.delete(email);
   }
 }

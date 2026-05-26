@@ -27,7 +27,6 @@ import conversationRoutes from './routes/conversation.routes';
 import messageRoutes from './routes/message.routes';
 import { setupChatHandlers } from './socket/chatHandlers';
 import { Server } from 'socket.io';
-import { redis } from './config/redis';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -107,7 +106,8 @@ fastify.register(fastifySocketIo, {
 
 // Register fastify-rate-limit
 fastify.register(fastifyRateLimit, {
-  redis: redis,
+  max: 100, // default limit
+  timeWindow: '1 minute'
 });
 // Register routes
 fastify.register(authRoutes, { prefix: '/api/auth' });

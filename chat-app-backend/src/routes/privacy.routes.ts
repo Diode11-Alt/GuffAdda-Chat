@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import jwt from 'jsonwebtoken';
 import { query } from '../config/db';
-import { redis } from '../config/redis';
+import { AuthService } from '../services/auth.service';
 import * as Sentry from '@sentry/node';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
@@ -60,7 +60,7 @@ export default async function privacyRoutes(fastify: FastifyInstance) {
         const email = userRes.rows[0].email;
         if (email) {
           // Delete OTP if exists
-          await redis.del(`otp:${email}`);
+          AuthService.deleteOtp(email);
         }
       }
 
