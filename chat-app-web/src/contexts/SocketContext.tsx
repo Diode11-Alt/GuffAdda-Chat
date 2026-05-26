@@ -18,7 +18,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
     if (!isAuthenticated || !user) return;
 
     const token = localStorage.getItem('accessToken');
-    const newSocket = io('http://localhost:3000', {
+    const newSocket = io(window.location.hostname === 'localhost' ? 'http://localhost:3000' : `http://${window.location.hostname}:3000`, {
       auth: { token },
       reconnection: true,
       reconnectionAttempts: 10,

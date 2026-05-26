@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : `http://${window.location.hostname}:3000`;
 
 export async function apiFetch(path: string, options: RequestInit = {}) {
   const token = localStorage.getItem('accessToken');

@@ -66,7 +66,7 @@ export default function ChatHeader({ conversation, onInfoClick }: ChatHeaderProp
           <h3 className="text-[15px] font-semibold text-white truncate">{displayName}</h3>
           <p
             className="text-xs truncate"
-            style={{ color: isOnline ? 'var(--accent-blue)' : 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-secondary)' }}
           >
             {getStatusText()}
           </p>

@@ -25,7 +25,8 @@ export default function Avatar({ name, src, size = 44, online, className = '' }:
 
   const gradientIndex = name.charCodeAt(0) % GRADIENTS.length;
 
-  const fullSrc = src && !src.startsWith('http') && !src.startsWith('data:') ? `http://localhost:3000${src}` : src;
+  const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:3000' : "http://" + window.location.hostname + ":3000";
+  const fullSrc = src && !src.startsWith('http') && !src.startsWith('data:') ? `${baseUrl}${src}` : src;
 
   return (
     <div className={`relative shrink-0 ${className}`} style={{ width: size, height: size }}>

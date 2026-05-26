@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════
-   KURA KANI — Design Token System
-   Telegram × Botim Gradient Theme
-   ═══════════════════════════════════════════ */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -12,79 +7,52 @@
 
 :root {
   /* ── Core Background ── */
-  --bg-primary:        #0E1621;
-  --bg-secondary:      #17212B;
-  --bg-tertiary:       #1C2A3A;
-  --bg-chat:           #0E1621;
-  --bg-input:          #242F3D;
+  --bg-primary:        #000000;
+  --bg-secondary:      #000000;
+  --bg-tertiary:       #121212;
+  --bg-chat:           #000000;
+  --bg-input:          #262626;
 
-  /* ── Telegram Gradient Family ── */
-  --gradient-primary:  linear-gradient(135deg, #DC2626 0%, #EF4444 50%, #F87171 100%);
-  --gradient-header:   linear-gradient(135deg, #2B5278 0%, #1B3A4B 100%);
-  --gradient-avatar-1: linear-gradient(135deg, #FF6B6B 0%, #EE5A24 100%);
-  --gradient-avatar-2: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%);
-  --gradient-avatar-3: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
-  --gradient-avatar-4: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
-  --gradient-avatar-5: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
-  --gradient-avatar-6: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
-  --gradient-call:     linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
-  --gradient-danger:   linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-
+  /* ── Gradients ── */
+  --gradient-primary:  linear-gradient(135deg, #FF3040 0%, #E1306C 100%);
+  --gradient-avatar-1: linear-gradient(135deg, #FF3040 0%, #E1306C 100%);
+  --gradient-avatar-2: linear-gradient(135deg, #E1306C 0%, #F56040 100%);
+  
   /* ── Accent Colors ── */
-  --accent-blue:       #EF4444; /* Renamed to red visually, kept var name for compatibility */
+  --accent-blue:       #FF3040; /* We map blue to Insta red/crimson for consistency with components */
   --accent-green:      #4FAE4E;
-  --accent-purple:     #8B5CF6;
-  --accent-orange:     #E8913A;
-  --accent-red:        #E53935;
+  --accent-red:        #ED4956;
+  --accent-orange:     #F56040;
 
   /* ── Text ── */
-  --text-primary:      #FFFFFF;
-  --text-secondary:    #8B9AAF;
-  --text-tertiary:     #5A6E82;
-  --text-link:         #EF4444;
+  --text-primary:      #F5F5F5;
+  --text-secondary:    #A8A8A8;
+  --text-tertiary:     #737373;
+  --text-link:         #E0F2FE;
 
   /* ── Bubbles ── */
-  --bubble-out-start:  #B91C1C;
-  --bubble-out-end:    #EF4444;
+  --bubble-out-start:  #FF3040;
+  --bubble-out-end:    #E1306C;
   --bubble-in:         #262626;
 
   /* ── Status ── */
-  --status-online:     #4FAE4E;
-  --status-recently:   #E8913A;
-  --status-offline:    #5A6E82;
+  --status-online:     #78DE45;
+  --status-offline:    #737373;
 
   /* ── Ticks ── */
-  --tick-sent:         #5A6E82;
-  --tick-delivered:    #5A6E82;
-  --tick-read:         #4FAE4E;
+  --tick-sent:         rgba(255, 255, 255, 0.6);
+  --tick-delivered:    rgba(255, 255, 255, 0.6);
+  --tick-read:         #FFFFFF;
 
   /* ── Borders ── */
-  --border-subtle:     rgba(255, 255, 255, 0.06);
-  --border-medium:     rgba(255, 255, 255, 0.10);
-
-  /* ── Shadows ── */
-  --shadow-sm:         0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md:         0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-bubble:     0 1px 2px rgba(0, 0, 0, 0.2);
-
-  /* ── Radius ── */
-  --radius-sm:         6px;
-  --radius-md:         12px;
-  --radius-lg:         18px;
-  --radius-xl:         24px;
-  --radius-bubble:     18px;
+  --border-subtle:     #262626;
+  --border-medium:     #363636;
 
   /* ── Fonts ── */
-  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
-
-  /* ── Transitions ── */
-  --ease-out-expo:     cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring:       cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ═══ Global Reset ═══ */
 @layer base {
   * {
     border-color: var(--border-subtle);
@@ -98,97 +66,18 @@
   }
 }
 
-/* ═══ Scrollbar Styling ═══ */
-@layer utilities {
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
+/* Custom Scrollbar for a sleek look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-
-/* ═══ Typing dots animation ═══ */
-@keyframes typing-dot {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-  30% { transform: translateY(-4px); opacity: 1; }
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-.typing-dot:nth-child(1) { animation: typing-dot 1.4s infinite 0s; }
-.typing-dot:nth-child(2) { animation: typing-dot 1.4s infinite 0.2s; }
-.typing-dot:nth-child(3) { animation: typing-dot 1.4s infinite 0.4s; }
-
-/* ═══ Message entrance animation ═══ */
-@keyframes msg-enter {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 4px;
 }
-.animate-msg-enter {
-  animation: msg-enter 200ms var(--ease-out-expo) both;
-}
-
-/* ═══ Online pulse ═══ */
-@keyframes online-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
-}
-.animate-online-pulse {
-  animation: online-pulse 2s infinite;
-}
-
-/* ═══ Badge bounce ═══ */
-@keyframes badge-bounce {
-  0% { transform: scale(0); }
-  60% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-.animate-badge-bounce {
-  animation: badge-bounce 400ms var(--ease-spring) both;
-}
-
-/* ═══ Gradient text ═══ */
-.gradient-text {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ═══ Premium Instagram Mesh Background ═══ */
-.instagram-chat-bg {
-  background-color: #0c0f14 !important;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 0);
-  background-size: 24px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.instagram-chat-bg::before {
-  content: '';
-  position: absolute;
-  top: -30%;
-  right: -30%;
-  width: 80%;
-  height: 80%;
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(80px);
-}
-.instagram-chat-bg::after {
-  content: '';
-  position: absolute;
-  bottom: -30%;
-  left: -30%;
-  width: 80%;
-  height: 80%;
-  background: radial-gradient(circle, rgba(161, 0, 242, 0.08) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(80px);
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
 }

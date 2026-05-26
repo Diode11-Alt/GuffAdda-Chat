@@ -134,14 +134,14 @@ export default function AnimatedChat() {
               <div 
                 key={msg.id} 
                 className={`msg-enter flex ${isStatus ? 'justify-center' : 'justify-start'} w-full`}
-                style={{ animationDelay: \`\${idx * 0.15}s\` }}
+                style={{ animationDelay: `${idx * 0.15}s` }}
               >
                 {isStatus ? (
                   <div className="bg-[#F0EBE1] text-[#0A0A0A] text-xs uppercase tracking-widest py-2 px-6 font-bold">
                     {msg.text}
                   </div>
                 ) : (
-                  <div className={\`flex w-full \${isMe ? 'md:w-4/5 ml-auto' : 'w-full'} group\`}>
+                  <div className={`flex w-full ${isMe ? 'md:w-4/5 ml-auto' : 'w-full'} group`}>
                     
                     {!isMe && (
                       <div className="w-12 pt-3 flex-shrink-0 flex justify-center relative bg-[#0A0A0A] z-10">
@@ -149,13 +149,13 @@ export default function AnimatedChat() {
                       </div>
                     )}
 
-                    <div className={\`flex-1 \${isMe ? 'text-right' : 'pl-8'}\`}>
+                    <div className={`flex-1 ${isMe ? 'text-right' : 'pl-8'}`}>
                       <div className="text-[10px] uppercase tracking-widest text-[#F0EBE1]/40 mb-4 flex items-center gap-4">
                         {isMe && <span className="flex-1 h-[1px] bg-[#F0EBE1]/10 group-hover:bg-[#FF4300]/40 transition-colors duration-500" />}
                         <span>{isMe ? 'YOU' : 'AGENT'} / {msg.time}</span>
                         {!isMe && <span className="flex-1 h-[1px] bg-[#F0EBE1]/10 group-hover:bg-[#FF4300]/40 transition-colors duration-500" />}
                       </div>
-                      <p className={\`text-xl md:text-[28px] leading-[1.6] \${isMe ? 'font-serif italic text-[#F0EBE1]' : 'font-mono text-[#F0EBE1]/80'} transition-colors duration-500 hover:text-[#FF4300]\`}>
+                      <p className={`text-xl md:text-[28px] leading-[1.6] ${isMe ? 'font-serif italic text-[#F0EBE1]' : 'font-mono text-[#F0EBE1]/80'} transition-colors duration-500 hover:text-[#FF4300]`}>
                         {msg.text}
                       </p>
                     </div>

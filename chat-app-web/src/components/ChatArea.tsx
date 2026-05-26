@@ -69,7 +69,7 @@ export default function ChatArea() {
   // No active conversation selected
   if (!activeConversation) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center instagram-chat-bg">
+      <div className="flex-1 flex flex-col items-center justify-center bg-black">
         <div
           className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
           style={{ background: 'var(--bg-tertiary)' }}
@@ -86,7 +86,7 @@ export default function ChatArea() {
 
   return (
     <div className="flex-1 flex h-full">
-      <div className="flex-1 flex flex-col h-full instagram-chat-bg relative">
+      <div className="flex-1 flex flex-col h-full bg-black relative">
         <ChatHeader 
           conversation={activeConversation} 
           onInfoClick={() => setShowInfo(true)}

@@ -128,8 +128,8 @@ export default function MessageBubble({
                 ? 'linear-gradient(135deg, var(--bubble-out-start), var(--bubble-out-end))'
                 : 'var(--bubble-in)',
             borderRadius: isMe
-              ? (compact ? '12px' : '18px 18px 4px 18px')
-              : (compact ? '12px' : '18px 18px 18px 4px'),
+              ? (compact ? '22px' : '22px 22px 4px 22px')
+              : (compact ? '22px' : '22px 22px 22px 4px'),
             padding: message.messageType === 'image' ? '0' : '8px 12px 6px 12px',
             boxShadow: message.messageType === 'image' ? 'none' : 'var(--shadow-bubble)',
             overflow: message.messageType === 'image' ? 'hidden' : 'visible',
@@ -154,7 +154,7 @@ export default function MessageBubble({
         {message.messageType === 'image' ? (
           <div className="relative rounded-2xl overflow-hidden group/image">
             <img 
-              src={message.content.startsWith('http') ? message.content : `http://localhost:3000${message.content}`} 
+              src={message.content.startsWith('http') ? message.content : `http://${window.location.hostname}:3000${message.content}`} 
               alt="Uploaded media" 
               className="max-w-full h-auto max-h-[300px] object-cover block" 
             />
@@ -171,7 +171,7 @@ export default function MessageBubble({
           </div>
         ) : message.messageType === 'file' ? (
           <a 
-            href={message.content.startsWith('http') ? message.content : `http://localhost:3000${message.content}`}
+            href={message.content.startsWith('http') ? message.content : `http://${window.location.hostname}:3000${message.content}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-2 bg-black/20 rounded-md mb-1 hover:bg-black/30 transition-colors"
@@ -192,7 +192,7 @@ export default function MessageBubble({
               <Mic size={20} />
             </div>
             <audio 
-              src={message.content.startsWith('http') ? message.content : `http://localhost:3000${message.content}`} 
+              src={message.content.startsWith('http') ? message.content : `http://${window.location.hostname}:3000${message.content}`} 
               controls 
               className="h-8 w-full max-w-[200px]"
               style={{ filter: isMe ? 'invert(1) grayscale(1) brightness(2)' : 'none' }} // simple trick to style default audio player a bit
@@ -204,32 +204,34 @@ export default function MessageBubble({
           </p>
         )}
 
-        {/* Timestamp + ticks */}
+
+        </div>
+
+        {/* Timestamp + ticks - Outside the bubble for Insta style */}
         {message.messageType !== 'image' && (
-          <div className={`flex items-center gap-1 mt-1 ${isMe ? 'justify-end' : 'justify-end'}`}>
+          <div className={`flex items-center gap-1 mt-1 ${isMe ? 'justify-end' : 'justify-start'}`}>
             {message.isEdited && (
-              <span className="text-[10px] mr-1" style={{ color: isMe ? 'rgba(255,255,255,0.7)' : 'var(--text-tertiary)' }}>
+              <span className="text-[10px] mr-1 text-[#737373]">
                 edited
               </span>
             )}
-            <span className="text-[10px]" style={{ color: isMe ? 'rgba(255,255,255,0.5)' : 'var(--text-tertiary)' }}>
+            <span className="text-[10px] text-[#737373]">
               {time}
             </span>
             {isMe && message.status === 'sent' && (
-              <Check size={14} style={{ color: 'rgba(255,255,255,0.5)' }} />
+              <Check size={12} className="text-[#737373]" />
             )}
             {isMe && message.status === 'delivered' && (
-              <CheckCheck size={14} style={{ color: 'rgba(255,255,255,0.5)' }} />
+              <CheckCheck size={12} className="text-[#737373]" />
             )}
             {isMe && message.status === 'read' && (
-              <CheckCheck size={14} style={{ color: 'var(--tick-read)' }} />
+              <span className="text-[10px] font-medium text-[#A8A8A8] ml-1">Seen</span>
             )}
             {isMe && !message.status && (
-              <Check size={14} style={{ color: 'rgba(255,255,255,0.5)' }} />
+              <Check size={12} className="text-[#737373]" />
             )}
           </div>
         )}
-        </div>
 
         {/* Reactions Display */}
         {message.reactions && message.reactions.length > 0 && (

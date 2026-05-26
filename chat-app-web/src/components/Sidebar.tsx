@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { LogOut, Settings, Plus, Search, X } from 'lucide-react';
+import { LogOut, Settings, Search, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useChat } from '../contexts/ChatContext';
 import { useNavigate } from 'react-router-dom';
 import Avatar from './shared/Avatar';
-import Badge from './shared/Badge';
 import NewChatModal from './sidebar/NewChatModal';
 import SettingsModal from './sidebar/SettingsModal';
 import StoriesBar from './sidebar/StoriesBar';
@@ -31,12 +30,6 @@ export default function Sidebar() {
     return name.toLowerCase().includes(search.toLowerCase());
   });
 
-  const onlineContacts = conversations
-    .filter(c => c.type === 'direct' && c.other_user_id && onlineUsers.has(c.other_user_id))
-    .map(c => ({ id: c.other_user_id, name: c.other_user_name, avatar: c.other_user_avatar }));
-  
-  // Remove duplicates by id
-  const uniqueOnlineContacts = Array.from(new Map(onlineContacts.map(item => [item.id, item])).values());
 
   // Debounced search for messages
   useEffect(() => {
@@ -78,15 +71,14 @@ export default function Sidebar() {
     <>
       <div className="w-full md:w-[360px] flex flex-col h-full shrink-0" style={{ background: 'var(--bg-secondary)' }}>
         {/* Header - Instagram Style */}
-        <div className="h-14 px-4 flex items-center justify-between shrink-0">
+        <div className="h-14 px-4 flex items-center justify-between shrink-0 bg-black">
           <div className="flex items-center gap-1 cursor-pointer">
             <h2 className="text-xl font-bold text-white tracking-tight">{user?.display_name || 'Direct'}</h2>
             <span className="text-gray-400 mt-1">˅</span>
           </div>
           <button
             onClick={() => setShowNewChat(true)}
-            className="p-2 transition-colors cursor-pointer"
-            style={{ color: 'var(--text-primary)' }}
+            className="p-2 transition-colors cursor-pointer text-white"
             title="New Message"
           >
             {/* Insta style edit/new icon */}
@@ -102,55 +94,23 @@ export default function Sidebar() {
         <StoriesBar />
 
         {/* Search */}
-        <div className="px-4 py-2 shrink-0">
+        <div className="px-4 py-3 shrink-0 bg-black">
           <div className="relative">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A8A8A8]" />
             <input
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search"
-              className="w-full pl-9 pr-8 py-2 text-[15px] text-white placeholder-gray-400 outline-none transition-all"
-              style={{
-                background: 'rgba(255,255,255,0.1)',
-                borderRadius: '12px',
-                border: 'none',
-              }}
+              className="w-full pl-9 pr-8 py-2 text-[15px] text-white placeholder-[#A8A8A8] outline-none transition-all bg-[#262626] rounded-xl"
             />
             {search && (
-              <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400">
+              <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-[#A8A8A8]">
                 <X size={14} />
               </button>
             )}
           </div>
         </div>
-
-        {/* Stories / Active Users (only show when not searching) */}
-        {!search.trim() && uniqueOnlineContacts.length > 0 && (
-          <div className="px-4 py-3 shrink-0 flex gap-4 overflow-x-auto scrollbar-none border-b border-[var(--border-subtle)]">
-            <div className="flex flex-col items-center gap-1 cursor-pointer">
-              <div className="relative">
-                <Avatar src={user?.avatar_url} name={user?.display_name || 'Me'} size={60} />
-                <div className="absolute bottom-0 right-0 w-5 h-5 bg-[var(--bg-secondary)] rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-gray-300 text-black rounded-full flex items-center justify-center font-bold text-lg leading-none pb-0.5">+</div>
-                </div>
-              </div>
-              <span className="text-[11px] text-gray-400">Your note</span>
-            </div>
-            
-            {uniqueOnlineContacts.map(contact => (
-              <div key={contact.id} className="flex flex-col items-center gap-1 cursor-pointer">
-                {/* Insta-style gradient ring */}
-                <div className="p-[2px] rounded-full" style={{ background: 'var(--gradient-primary)' }}>
-                  <div className="p-[2px] rounded-full" style={{ background: 'var(--bg-secondary)' }}>
-                    <Avatar src={contact.avatar} name={contact.name || ''} size={52} />
-                  </div>
-                </div>
-                <span className="text-[11px] text-white max-w-[60px] truncate">{contact.name?.split(' ')[0]}</span>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Conversation List */}
         <div className="flex-1 overflow-y-auto scrollbar-thin">

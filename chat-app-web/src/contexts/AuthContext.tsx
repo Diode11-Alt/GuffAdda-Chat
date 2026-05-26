@@ -18,6 +18,11 @@ interface AuthState {
 
 const AuthContext = createContext<AuthState | null>(null);
 
+const getBaseUrl = () => {
+  return window.location.hostname === 'localhost' ? 'http://localhost:3000' : `http://${window.location.hostname}:3000`;
+};
+
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
     const stored = localStorage.getItem('user');
@@ -27,7 +32,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthenticated = !!user && !!localStorage.getItem('accessToken');
 
   const login = async (email: string, password: string) => {
-    const res = await fetch('http://localhost:3000/api/auth/login', {
+    const res = await fetch(`${getBaseUrl()}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -42,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (email: string, password: string, displayName: string) => {
-    const res = await fetch('http://localhost:3000/api/auth/register', {
+    const res = await fetch(`${getBaseUrl()}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, displayName }),

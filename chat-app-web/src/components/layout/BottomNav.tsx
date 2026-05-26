@@ -1,4 +1,4 @@
-import { Home, Search, PlusSquare, MessageCircle, User } from 'lucide-react';
+import { Home, Search, PlusSquare, MessageCircle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import Avatar from '../shared/Avatar';
 
@@ -6,7 +6,7 @@ export default function BottomNav() {
   const { user } = useAuth();
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 border-t border-[var(--border-subtle)] bg-[var(--bg-primary)] z-50 px-6 flex items-center justify-between">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 border-t border-[#262626] bg-black z-50 px-6 flex items-center justify-between">
       <button className="p-2 transition-transform active:scale-90 text-[var(--text-primary)]">
         <Home size={26} strokeWidth={2} />
       </button>
