@@ -17,7 +17,7 @@
     "libsodium-wrappers": "^0.8.4",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react-dom": "^19.2.7",
     "react-router-dom": "^7.15.1",
     "socket.io-client": "^4.8.3"
   },
